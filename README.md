@@ -835,6 +835,11 @@ export const createProfileAction = async (
 - add .env to .gitignore !!!
 - it will take few minutes
 
+My Creds:
+Org: NextjsProject
+DB: Hotel Bookings
+DB Password: qiPanjqxkKxo7zhJ
+
 ### Prisma
 
 - install prisma vs-code extension
