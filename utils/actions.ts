@@ -12,14 +12,14 @@ export const createProfileAction = async (prevState: any, formData: FormData) =>
         if(!user) throw new Error('Not logged in.');
 
         const rawData = Object.fromEntries(formData);
-        // const validatedFields = profileSchema.parse(rawData);
+        console.log('Raw Data:', rawData);
+        const validatedFields = profileSchema.parse(rawData);
         await db.profile.create({
             data: {
                 clerkId: user.id,
                 email: user.emailAddresses[0].emailAddress,
                 profileImage: user.imageUrl ?? '',
-                // ...validatedFields,
-                firstName: 'sample', lastName: '1234', username:'sample'
+                ...validatedFields
             }
         });
         await clerkClient.users.updateUserMetadata(user.id, {
@@ -33,4 +33,20 @@ export const createProfileAction = async (prevState: any, formData: FormData) =>
         return { message: err instanceof Error ? err.message : 'There was an error.' };
     }
     redirect('/');
+};
+
+export const fetchProfileImage = async () => {
+    const user = await currentUser();
+    if(!user) return null;
+
+    const profile = await db.profile.findUnique({
+        where: {
+            clerkId: user.id
+        },
+        select: {
+            profileImage: true
+        }
+    });
+
+    return profile?.profileImage;
 };
