@@ -128,9 +128,20 @@ export const createPropertyAction = async (
     try {
         const rawData = Object.fromEntries(formData);
         const file = formData.get('image') as File;
+        const parsedData = {
+            ...rawData,
+            price: typeof rawData.price === 'string' ? parseFloat(rawData.price) : 0,
+            guests: typeof rawData.guests === 'string' ? parseInt(rawData.guests, 10) : 0,
+            bedrooms: typeof rawData.bedrooms === 'string' ? parseInt(rawData.bedrooms, 10) : 0,
+            beds: typeof rawData.beds === 'string' ? parseInt(rawData.beds, 10) : 0,
+            bathrooms: typeof rawData.bathrooms === 'string' ? parseInt(rawData.bathrooms, 10) : 0,
+            amenities: JSON.parse(rawData.amenities as string),
+        };
 
-        const validatedFields = validateWithZodSchema(propertySchema, rawData);
+        const validatedFields = validateWithZodSchema(propertySchema, parsedData);
         const validatedFile = validateWithZodSchema(imageSchema, { image: file });
+        validatedFields.amenities = JSON.stringify(validatedFields.amenities);
+
         const fullPath = await uploadImage(validatedFile.image);
 
         await db.property.create({
