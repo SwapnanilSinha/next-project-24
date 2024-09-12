@@ -676,7 +676,7 @@ import { Button } from '@/components/ui/button';
 type SubmitButtonProps = {
   className?: string;
   text?: string;
-};
+};  
 
 export function SubmitButton({
   className = '',
