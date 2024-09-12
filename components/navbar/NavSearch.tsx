@@ -11,11 +11,8 @@ function NavSearch() {
   const [search, setSearch] = useState(searchParams.get('search')?.toString() || '');
   const handleSearch = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParams);
-    if (value) {
-      params.set('search', value);
-    } else {
-      params.delete('search');
-    }
+    if (value) params.set('search', value);
+    else params.delete('search');
     replace(`${pathname}?${params.toString()}`);
   }, 300);
   useEffect(() => {
