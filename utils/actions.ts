@@ -140,7 +140,7 @@ export const createPropertyAction = async (
 
         const validatedFields = validateWithZodSchema(propertySchema, parsedData);
         const validatedFile = validateWithZodSchema(imageSchema, { image: file });
-        validatedFields.amenities = JSON.stringify(validatedFields.amenities);
+        validatedFields.amenities = JSON.stringify(validatedFields.amenities) as unknown as { name: string; selected: boolean; }[];
 
         const fullPath = await uploadImage(validatedFile.image);
 
