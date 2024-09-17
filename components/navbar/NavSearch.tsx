@@ -23,7 +23,7 @@ function NavSearch() {
   return (
     <Input
       type='search'
-      placeholder='search for your next home...'
+      placeholder='search for your next stay...'
       className='max-w-xs dark:bg-muted '
       onChange={(e) => {
         setSearch(e.target.value);
