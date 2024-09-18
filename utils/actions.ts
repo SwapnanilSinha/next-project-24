@@ -138,11 +138,8 @@ export const createPropertyAction = async (
             amenities: JSON.parse(rawData.amenities as string),
         };
 
-        const validatedFields = validateWithZodSchema(propertySchema, parsedData);
+        const validatedFields = validateWithZodSchema(propertySchema, rawData);
         const validatedFile = validateWithZodSchema(imageSchema, { image: file });
-
-        validatedFields.amenities = JSON.stringify(validatedFields.amenities);
-
         const fullPath = await uploadImage(validatedFile.image);
 
         await db.property.create({
