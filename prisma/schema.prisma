@@ -19,6 +19,8 @@ model Profile {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   Property     Property[]
+  reviews Review[]
+  bookings Booking[]
 }
 
 model Property {
@@ -39,4 +41,33 @@ model Property {
   updatedAt   DateTime @updatedAt
   profile     Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId   String
+  reviews Review[]
+  bookings Booking[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  profile   Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
+  profileId String
+  property   Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String
+  orderTotal     Int
+  totalNights    Int
+  checkIn   DateTime
+  checkOut  DateTime
+  paymentStatus Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
