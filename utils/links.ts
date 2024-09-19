@@ -12,5 +12,5 @@ type NavLink = {
     { href: '/reservations ', label: 'Reservations' },
     { href: '/rentals/create ', label: 'Create Property' },
     { href: '/rentals', label: 'My Properties' },
-    { href: '/admin ', label: 'Admin' },
+    // { href: '/admin ', label: 'Admin' },
   ];
