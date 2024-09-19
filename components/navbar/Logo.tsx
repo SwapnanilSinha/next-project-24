@@ -7,7 +7,7 @@ function Logo() {
   return (
     <Button size='icon' asChild>
       <Link href='/'>
-      <BsHouseHeartFill className='w-6 h-6'></BsHouseHeartFill></Link>
+        <BsHouseHeartFill className='w-6 h-6'></BsHouseHeartFill></Link>
     </Button>
   )
 }
