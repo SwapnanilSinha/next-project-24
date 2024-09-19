@@ -24,7 +24,7 @@ function SubmitReview({ propertyId }: { propertyId: string }) {
               labelText='feedback'
               defaultValue='Amazing place !!!'
             />
-            <SubmitButton text='Submit' className='mt-4' />
+            <SubmitButton text='Submit' className='mt-4' size={'default'} />
           </FormContainer>
         </Card>
       )}
