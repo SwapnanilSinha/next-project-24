@@ -127,8 +127,17 @@ export const createPropertyAction = async (
     const user = await getAuthUser();
 
     try {
+        const profile = await db.profile.findUnique({
+            where: { clerkId: user.id },
+        });
+
+        if (!profile) {
+            throw new Error('Profile not found. Please create a profile first.');
+        }
+
         const rawData = Object.fromEntries(formData);
         const file = formData.get('image') as File;
+
         const parsedData = {
             ...rawData,
             price: typeof rawData.price === 'string' ? parseFloat(rawData.price) : 0,
@@ -147,14 +156,14 @@ export const createPropertyAction = async (
             data: {
                 ...validatedFields,
                 image: fullPath,
-                profileId: user.id,
+                profileId: profile.id,
             },
         });
 
+        return { message: 'Property created successfully' };
     } catch (err) {
         return renderError(err);
     }
-    redirect('/');
 };
 
 export const fetchProperties = async ({
