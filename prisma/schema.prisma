@@ -8,7 +8,7 @@ generator client {
 }
 
 model Profile {
-  id           String     @id @map("_id") @db.ObjectId
+  id           String     @id @default(uuid()) @map("_id")
   clerkId      String     @unique
   firstName    String
   lastName     String
@@ -23,7 +23,7 @@ model Profile {
 }
 
 model Property {
-  id          String    @id @map("_id") @db.ObjectId
+  id          String    @id @default(uuid()) @map("_id")
   name        String
   tagline     String
   category    String
@@ -45,11 +45,11 @@ model Property {
 }
 
 model Review {
-  id         String   @id @map("_id") @db.ObjectId
+  id         String   @id @default(uuid()) @map("_id")
   profile    Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId  String
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId String   @db.ObjectId
+  propertyId String
   rating     Int
   comment    String
   createdAt  DateTime @default(now())
@@ -57,11 +57,11 @@ model Review {
 }
 
 model Booking {
-  id            String   @id @map("_id") @db.ObjectId
+  id            String   @id @default(uuid()) @map("_id")
   profile       Profile  @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId     String
   property      Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId    String   @db.ObjectId
+  propertyId    String
   orderTotal    Int
   totalNights   Int
   checkIn       DateTime
