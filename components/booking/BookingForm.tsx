@@ -18,7 +18,7 @@ function BookingForm() {
   return (
     <Card className='p-8 mb-4'>
       <CardTitle className='mb-8'>Summary </CardTitle>
-      <FormRow label={`$${price} x ${totalNights} nights`} amount={subTotal} />
+      <FormRow label={`₹${price} x ${totalNights} nights`} amount={subTotal} />
       <FormRow label='Cleaning Fee' amount={cleaning} />
       <FormRow label='Service Fee' amount={service} />
       <FormRow label='Tax' amount={tax} />
