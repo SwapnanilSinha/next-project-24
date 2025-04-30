@@ -376,7 +376,7 @@ export const createBookingAction = async (prevState: {
   } catch (error) {
     return renderError(error);
   }
-  redirect(`/checkout?bookingId=${bookingId}`);
+  redirect('/bookings');
 };
 
 export const fetchBookings = async () => {
