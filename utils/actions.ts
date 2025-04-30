@@ -50,7 +50,7 @@ export const createProfileAction = async (
 
     await db.profile.create({
       data: {
-        clerkId: profile.id,
+        clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
         profileImage: user.imageUrl ?? '',
         ...validatedFields,
